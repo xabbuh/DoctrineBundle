@@ -4,6 +4,7 @@ namespace Doctrine\Bundle\DoctrineBundle\Tests;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\DoctrineExtension;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\Attributes\TestWith;
 use Symfony\Bundle\FrameworkBundle\DependencyInjection\FrameworkExtension;
 use Symfony\Component\DependencyInjection\Alias;
@@ -18,6 +19,7 @@ class LockStoreSchemaListenerTest extends TestCase
     /** @param array<string, mixed> $config */
     #[TestWith([[], 0])]
     #[TestWith([['lock' => 'flock'], 1])]
+    #[IgnoreDeprecations]
     public function testLockStoreSchemaSubscriberWiring(array $config, int $expectedCount): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {

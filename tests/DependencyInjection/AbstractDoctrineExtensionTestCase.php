@@ -27,7 +27,7 @@ use InvalidArgumentException;
 use LogicException;
 use PDO;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\WithoutErrorHandler;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bridge\Doctrine\DependencyInjection\CompilerPass\RegisterEventListenersAndSubscribersPass;
 use Symfony\Bundle\DoctrineBundle\Tests\DependencyInjection\TestHydrator;
@@ -145,7 +145,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         $this->assertEquals('9.4.0', $config['serverVersion']);
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testDbalLoadUrlOverride(): void
     {
         $container = $this->loadContainer('dbal_allow_url_override');
@@ -166,7 +166,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         $this->assertFalse(isset($config['override_url']));
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testDbalLoadPartialUrlOverrideSetsDefaults(): void
     {
         $container = $this->loadContainer('dbal_allow_partial_url_override');
@@ -280,7 +280,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         $this->assertCount(0, $calls);
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testDbalSchemaManagerFactory(): void
     {
         $container = $this->loadContainer('dbal_schema_manager_factory');
@@ -720,7 +720,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
     }
 
     #[DataProvider('cacheConfigProvider')]
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testCacheConfig(string|null $expectedClass, string $entityManagerName, string|null $cacheGetter): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {
@@ -1168,7 +1168,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         }
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testWellKnownSchemaFilterDefaultTables(): void
     {
         $container = $this->getContainer([]);
@@ -1191,7 +1191,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         $this->assertTrue($filter->__invoke('anything_else'));
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testWellKnownSchemaFilterOverriddenTables(): void
     {
         $container = $this->getContainer([]);
@@ -1429,7 +1429,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         $this->assertFalse($collectorDefinition->getArguments()[1]);
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testNativeLazyObjectsWithoutConfig(): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {
@@ -1470,7 +1470,7 @@ abstract class AbstractDoctrineExtensionTestCase extends TestCase
         $this->assertTrue($entityManager->getConfiguration()->isNativeLazyObjectsEnabled());
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testNativeLazyObjectsWithConfigFalse(): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {

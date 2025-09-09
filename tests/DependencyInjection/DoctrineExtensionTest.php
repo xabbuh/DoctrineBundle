@@ -39,9 +39,9 @@ use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use InvalidArgumentException;
 use LogicException;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\Attributes\RequiresMethod;
 use PHPUnit\Framework\Attributes\TestWith;
-use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver;
@@ -75,7 +75,7 @@ class DoctrineExtensionTest extends TestCase
      * https://github.com/doctrine/orm/pull/7953 needed, otherwise ORM classes
      * we define services for trigger deprecations
      */
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testAutowiringAlias(): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {
@@ -657,7 +657,7 @@ class DoctrineExtensionTest extends TestCase
         $this->assertEquals('%doctrine.orm.second_level_cache.default_cache_factory.class%', $slcDefinition->getClass());
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testSingleEntityManagerWithCustomSecondLevelCacheConfiguration(): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {
@@ -1020,7 +1020,7 @@ class DoctrineExtensionTest extends TestCase
         $this->assertNotContains('messenger.transport_factory', $container->findTags());
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testInvalidCacheConfiguration(): void
     {
         if (! interface_exists(EntityManagerInterface::class)) {
@@ -1066,7 +1066,7 @@ class DoctrineExtensionTest extends TestCase
 
     /** @param array{type: ?string, pool?: string, id?: string} $cacheConfig */
     #[DataProvider('legacyCacheConfigurationProvider')]
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testLegacyCacheConfiguration(string $expectedAliasName, string $expectedAliasTarget, string $cacheName, array $cacheConfig): void
     {
         $this->testCacheConfiguration($expectedAliasName, $expectedAliasTarget, $cacheName, $cacheConfig);

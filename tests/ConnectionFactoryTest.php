@@ -8,7 +8,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Schema\DefaultSchemaManagerFactory;
 use Doctrine\Deprecations\PHPUnit\VerifyDeprecations;
-use PHPUnit\Framework\Attributes\WithoutErrorHandler;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 
 use function array_intersect_key;
 
@@ -62,7 +62,7 @@ class ConnectionFactoryTest extends TestCase
         );
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testCollateMapsToCollationForMySql(): void
     {
         $factory = new ConnectionFactory([]);
@@ -86,7 +86,7 @@ class ConnectionFactoryTest extends TestCase
         );
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testConnectionOverrideOptions(): void
     {
         $params = [

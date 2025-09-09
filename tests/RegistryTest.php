@@ -11,8 +11,8 @@ use Doctrine\Persistence\ObjectManager;
 use Fixtures\Bundles\RepositoryServiceBundle\Entity\TestCustomClassRepoEntity;
 use Fixtures\Bundles\RepositoryServiceBundle\Repository\TestCustomClassRepoRepository;
 use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\Attributes\RequiresPhp;
-use PHPUnit\Framework\Attributes\WithoutErrorHandler;
 use ProxyManager\Proxy\ProxyInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\VarExporter\LazyObjectInterface;
@@ -120,7 +120,7 @@ class RegistryTest extends TestCase
         $registry->resetManager('default');
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     #[RequiresPhp('<8.4')]
     public function testReset(): void
     {

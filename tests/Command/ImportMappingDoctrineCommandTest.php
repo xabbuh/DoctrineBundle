@@ -6,7 +6,7 @@ use Doctrine\Bundle\DoctrineBundle\Tests\DependencyInjection\Fixtures\TestKernel
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Export\ClassMetadataExporter;
 use InvalidArgumentException;
-use PHPUnit\Framework\Attributes\WithoutErrorHandler;
+use PHPUnit\Framework\Attributes\IgnoreDeprecations;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -66,7 +66,7 @@ class ImportMappingDoctrineCommandTest extends TestCase
         unset($this->kernel, $this->commandTester);
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testExecuteXmlWithBundle(): void
     {
         $this->commandTester->execute(['name' => 'ImportMappingTestFooBundle']);
@@ -80,7 +80,7 @@ class ImportMappingDoctrineCommandTest extends TestCase
         );
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testExecuteAnnotationsWithBundle(): void
     {
         $this->commandTester->execute([
@@ -97,7 +97,7 @@ class ImportMappingDoctrineCommandTest extends TestCase
         );
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testExecuteThrowsExceptionWithNamespaceAndNoPath(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -105,7 +105,7 @@ class ImportMappingDoctrineCommandTest extends TestCase
         $this->commandTester->execute(['name' => 'Some\Namespace']);
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testExecuteXmlWithNamespace(): void
     {
         $this->commandTester->execute([
@@ -122,7 +122,7 @@ class ImportMappingDoctrineCommandTest extends TestCase
         );
     }
 
-    #[WithoutErrorHandler]
+    #[IgnoreDeprecations]
     public function testExecuteAnnotationsWithNamespace(): void
     {
         $this->commandTester->execute([
